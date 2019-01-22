@@ -7,7 +7,7 @@ A very easy to use builder for BottomSheetDialogs with support for custom styles
 ## Download
 ```gradle
 dependencies {
-    implementation 'com.github.koenidv:BottomSheetBuilder:Tag'
+    implementation 'com.github.koenidv:BottomSheetBuilder:v1.1'
 }
 ```
 
