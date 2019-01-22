@@ -23,7 +23,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 
 //  Created by koenidv on 21.01.2019.
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "UnusedReturnValue"})
 public class BottomSheetBuilder {
 
     private BottomSheetDialog mBottomSheet;
@@ -126,13 +126,14 @@ public class BottomSheetBuilder {
      *
      * @param text The text to display
      */
-    public void setTitle(String text) {
+    public BottomSheetBuilder setTitle(String text) {
         if (text == null) {
             titleTextView.setVisibility(View.GONE);
         } else {
             titleTextView.setVisibility(View.VISIBLE);
             titleTextView.setText(text);
         }
+        return this;
     }
 
     /**
@@ -140,8 +141,9 @@ public class BottomSheetBuilder {
      *
      * @param stringRes A string resource ID
      */
-    public void setTitle(@StringRes int stringRes) {
+    public BottomSheetBuilder setTitle(@StringRes int stringRes) {
         titleTextView.setText(stringRes);
+        return this;
     }
 
     /**
@@ -151,13 +153,14 @@ public class BottomSheetBuilder {
      * @param style The title's style
      *              Default is android.R.TextAppearance_DeviceDefault_Medium
      */
-    public void setTitle(String text, int style) {
+    public BottomSheetBuilder setTitle(String text, int style) {
         setTitle(text);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             titleTextView.setTextAppearance(style);
         } else {
             titleTextView.setTextAppearance(mContext, style);
         }
+        return this;
     }
 
     /**
@@ -165,8 +168,9 @@ public class BottomSheetBuilder {
      *
      * @param color A color (not color resource)
      */
-    public void setTitleColor(@ColorInt int color) {
+    public BottomSheetBuilder setTitleColor(@ColorInt int color) {
         titleTextView.setTextColor(color);
+        return this;
     }
 
 
@@ -279,9 +283,10 @@ public class BottomSheetBuilder {
      *
      * @param text The title of the item
      */
-    public void addItems(String... text) {
+    public BottomSheetBuilder addItems(String... text) {
         for (String thisText : text)
             mLayout.addView(createItem(thisText));
+        return this;
     }
 
     /**
@@ -289,9 +294,10 @@ public class BottomSheetBuilder {
      *
      * @param stringRes The resource Id of the item text
      */
-    public void addItems(@StringRes int... stringRes) {
+    public BottomSheetBuilder addItems(@StringRes int... stringRes) {
         for (int thisStringRes : stringRes)
             mLayout.addView(createItem(mContext.getString(thisStringRes)));
+        return this;
     }
 
     /**
@@ -300,7 +306,7 @@ public class BottomSheetBuilder {
      * @param strings The strings to show
      * @param icons   The resource ids of the icons
      */
-    public void addItems(String[] strings, @DrawableRes int[] icons) {
+    public BottomSheetBuilder addItems(String[] strings, @DrawableRes int[] icons) {
         if (strings.length > icons.length) {
             if (mTag != null) {
                 Log.e("BottomSheetBuilder: " + mTag + ": ", "Showing items without icons: Not enough icons specified.\nYou have to specify an icon for every String.\nTo add items without icons after items with icons, you can simply call addItems(String) again.");
@@ -315,6 +321,7 @@ public class BottomSheetBuilder {
                 mLayout.addView(createItem(strings[i], icons[i]));
             }
         }
+        return this;
     }
 
     /**
@@ -323,7 +330,7 @@ public class BottomSheetBuilder {
      * @param stringRes The resource ids of the Strings to show
      * @param icons     The resource ids of the icons
      */
-    public void addItems(@StringRes int[] stringRes, @DrawableRes int[] icons) {
+    public BottomSheetBuilder addItems(@StringRes int[] stringRes, @DrawableRes int[] icons) {
         if (stringRes.length > icons.length) {
             if (mTag != null) {
                 Log.e("BottomSheetBuilder: " + mTag + ": ", "Showing items without icons: Not enough icons specified.\nYou have to specify an icon for every String.\nTo add items without icons after items with icons, you can simply call addItems(String) again.");
@@ -338,6 +345,7 @@ public class BottomSheetBuilder {
                 mLayout.addView(createItem(mContext.getString(stringRes[i]), icons[i]));
             }
         }
+        return this;
     }
 
     /**
@@ -346,10 +354,11 @@ public class BottomSheetBuilder {
      * @param text  The text to display
      * @param color The text's color
      */
-    public void addItem(String text, @ColorInt int color) {
+    public BottomSheetBuilder addItem(String text, @ColorInt int color) {
         TextView itemTextView = createItem(text);
         itemTextView.setTextColor(color);
         mLayout.addView(itemTextView);
+        return this;
     }
 
     /**
@@ -358,10 +367,11 @@ public class BottomSheetBuilder {
      * @param stringRes The resource Id of the item text
      * @param color     The text's color
      */
-    public void addItem(@StringRes int stringRes, @ColorInt int color) {
+    public BottomSheetBuilder addItem(@StringRes int stringRes, @ColorInt int color) {
         TextView itemTextView = createItem(mContext.getString(stringRes));
         itemTextView.setTextColor(color);
         mLayout.addView(itemTextView);
+        return this;
     }
 
     /**
@@ -370,7 +380,7 @@ public class BottomSheetBuilder {
      * @param icon      The icon's resource id
      * @param positions Optional: The positions in the list of items
      */
-    public void setIcon(@DrawableRes int icon, @NonNull int... positions) {
+    public BottomSheetBuilder setIcon(@DrawableRes int icon, @NonNull int... positions) {
         if (positions.length == 0) {
             for (int i = 1; i < mLayout.getChildCount(); i++) {
                 TextView itemTextView = (TextView) mLayout.getChildAt(i);
@@ -407,6 +417,7 @@ public class BottomSheetBuilder {
                 }
             }
         }
+        return this;
     }
 
     /**
@@ -415,7 +426,7 @@ public class BottomSheetBuilder {
      * @param color     The color to set the item(s) to
      * @param positions Optional: The positions in the list of items
      */
-    public void setItemColor(@ColorInt int color, int... positions) {
+    public BottomSheetBuilder setItemColor(@ColorInt int color, int... positions) {
         if (positions.length == 0) {
             for (int i = 1; i < mLayout.getChildCount(); i++) {
                 TextView itemTextView = (TextView) mLayout.getChildAt(i);
@@ -473,6 +484,7 @@ public class BottomSheetBuilder {
                 }
             }
         }
+        return this;
     }
 
 
@@ -482,12 +494,14 @@ public class BottomSheetBuilder {
      *
      */
 
-    public void setOnItemClickListener(onItemClickListener onItemClickListener) {
+    public BottomSheetBuilder setOnItemClickListener(onItemClickListener onItemClickListener) {
         mItemClickListener = onItemClickListener;
+        return this;
     }
 
-    public void setOnSheetDismissedListener(onSheetDismissedListener onSheetDismissedListener) {
+    public BottomSheetBuilder setOnSheetDismissedListener(onSheetDismissedListener onSheetDismissedListener) {
         mDismissedListener = onSheetDismissedListener;
+        return this;
     }
 
 
@@ -502,8 +516,9 @@ public class BottomSheetBuilder {
      *
      * @param style The style resource id
      */
-    public void setStyle(@StyleRes int style) {
+    public BottomSheetBuilder setStyle(@StyleRes int style) {
         mSheetStyle = style;
+        return this;
     }
 
     /**
@@ -511,8 +526,9 @@ public class BottomSheetBuilder {
      *
      * @param tag The tag
      */
-    public void setTag(String tag) {
+    public BottomSheetBuilder setTag(String tag) {
         mTag = tag;
+        return this;
     }
 
     /**
@@ -520,8 +536,9 @@ public class BottomSheetBuilder {
      *
      * @param height The height in dp, default is 48dp
      */
-    public void setItemHeight(int height) {
+    public BottomSheetBuilder setItemHeight(int height) {
         mItemHeight = (int) (height * mContext.getResources().getDisplayMetrics().density + 0.5f);
+        return this;
     }
 
     /**
@@ -529,8 +546,9 @@ public class BottomSheetBuilder {
      *
      * @param height The height in pixel
      */
-    public void setItemHeightPx(int height) {
+    public BottomSheetBuilder setItemHeightPx(int height) {
         mItemHeight = height;
+        return this;
     }
 
     /**
@@ -538,8 +556,9 @@ public class BottomSheetBuilder {
      *
      * @param padding The padding in dp, default is 16dp
      */
-    public void setItemPadding(int padding) {
+    public BottomSheetBuilder setItemPadding(int padding) {
         mItemPadding = (int) (padding * mContext.getResources().getDisplayMetrics().density + 0.5f);
+        return this;
     }
 
     /**
@@ -547,8 +566,9 @@ public class BottomSheetBuilder {
      *
      * @param padding The padding in pixel
      */
-    public void setItemPaddingPx(int padding) {
+    public BottomSheetBuilder setItemPaddingPx(int padding) {
         mItemPadding = padding;
+        return this;
     }
 
 
