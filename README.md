@@ -13,11 +13,12 @@ dependencies {
 
 ## Quick start
 ```java
-BottomSheetBuilder bottomsheet = new BottomSheetBuilder(context);
-bottomsheet.setTitle(String title);
-bottomsheet.addItems(String[] strings, int[] icons);
-bottomsheet.setOnItemClickListener(onItemClickListener listener);
-bottomsheet.show();
+BottomSheetBuilder bottomSheet = new BottomSheetBuilder(context);
+bottomSheet
+    .setTitle(String title)
+    .addItems(String[] strings, int[] icons)
+    .setOnItemClickListener(onItemClickListener listener)
+    .show();
 ```
 
 For the entire documentation, please refer to the [Wiki](https://github.com/koenidv/BottomSheetBuilder/wiki).
